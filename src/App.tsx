@@ -475,11 +475,11 @@ function App() {
               <div className="flex items-center gap-4 text-xs text-gray-500">
                 <span className="flex items-center gap-1">
                   <i className="fa-solid fa-keyboard text-neon-blue" />
-                  Стрелки / WASD — управление
+                  Управление - в разделе "Controls Settings"
                 </span>
                 <span className="flex items-center gap-1">
                   <i className="fa-solid fa-expand text-neon-pink" />
-                  F — полный экран
+                  Приятной игры
                 </span>
               </div>
               <a
