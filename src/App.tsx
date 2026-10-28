@@ -307,6 +307,22 @@ function App() {
               </div>
             ))}
           </div>
+          
+          {/* Schedule note */}
+          <div className="mt-8 text-center">
+            <p className="text-gray-400 text-sm">
+              <span className="text-neon-purple">📢</span>{' '}
+              Актуальное расписание публикуется в{' '}
+              <a 
+                href="https://t.me/ro1eplayground" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-neon-blue hover:underline transition-all"
+              >
+                Telegram
+              </a>
+            </p>
+          </div>
         </div>
       </section>
 
