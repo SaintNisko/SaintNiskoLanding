@@ -1,7 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
+  const [isGameOpen, setIsGameOpen] = useState(false);
+
+  // Lock body scroll when game modal is open
+  useEffect(() => {
+    if (isGameOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isGameOpen]);
 
   const schedule = [
     { day: 'Понедельник', activity: 'Отдых', time: null, icon: '😴' },
@@ -333,15 +344,13 @@ function App() {
                 Классика PSX, которая не нуждается в представлении. Почувствуй скорость ретровейва!
               </p>
               
-              <a
-                href="https://www.retrogames.cc/psx-games/ridge-racer.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-neon-purple to-neon-pink rounded-full text-white font-bold text-lg uppercase tracking-wider hover:scale-105 transition-transform duration-300 shadow-[0_0_30px_rgba(176,38,255,0.5)] hover:shadow-[0_0_50px_rgba(176,38,255,0.8)]"
+              <button
+                onClick={() => setIsGameOpen(true)}
+                className="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-neon-purple to-neon-pink rounded-full text-white font-bold text-lg uppercase tracking-wider hover:scale-105 transition-transform duration-300 shadow-[0_0_30px_rgba(176,38,255,0.5)] hover:shadow-[0_0_50px_rgba(176,38,255,0.8)] cursor-pointer"
               >
                 <i className="fa-solid fa-play" />
                 Играть сейчас
-              </a>
+              </button>
               
               <div className="mt-8 flex items-center justify-center gap-4 text-sm text-gray-500">
                 <span className="flex items-center gap-1">
@@ -361,6 +370,68 @@ function App() {
           </div>
         </div>
       </section>
+
+      {/* Game Modal */}
+      {isGameOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/90 backdrop-blur-sm"
+            onClick={() => setIsGameOpen(false)}
+          />
+          
+          {/* Modal Content */}
+          <div className="relative w-full max-w-5xl bg-dark-card border-2 border-neon-purple rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(176,38,255,0.5)] animate-border-glow">
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-4 bg-dark-surface border-b border-neon-purple/30">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🏎️</span>
+                <h3 className="text-lg font-bold neon-text">RIDGE RACER</h3>
+                <span className="text-xs text-gray-500 hidden sm:inline">PlayStation Classic</span>
+              </div>
+              <button
+                onClick={() => setIsGameOpen(false)}
+                className="w-10 h-10 rounded-full bg-red-500/20 border border-red-500/50 flex items-center justify-center text-red-400 hover:bg-red-500/40 hover:text-white transition-all duration-300"
+              >
+                <i className="fa-solid fa-xmark text-lg" />
+              </button>
+            </div>
+            
+            {/* Game iframe */}
+            <div className="relative w-full" style={{ paddingBottom: '75%' }}>
+              <iframe
+                src="https://www.retrogames.cc/embed/41555-ridge-racer.html"
+                className="absolute top-0 left-0 w-full h-full border-0"
+                allowFullScreen
+                title="Ridge Racer - RetroGames"
+                style={{ border: 'none' }}
+              />
+            </div>
+            
+            {/* Footer info */}
+            <div className="px-6 py-3 bg-dark-surface border-t border-neon-purple/30 flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-4 text-xs text-gray-500">
+                <span className="flex items-center gap-1">
+                  <i className="fa-solid fa-keyboard text-neon-blue" />
+                  Стрелки / WASD — управление
+                </span>
+                <span className="flex items-center gap-1">
+                  <i className="fa-solid fa-expand text-neon-pink" />
+                  F — полный экран
+                </span>
+              </div>
+              <a
+                href="https://www.retrogames.cc/psx-games/ridge-racer.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-gray-500 hover:text-neon-purple transition-colors"
+              >
+                Открыть в новой вкладке →
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="relative py-12 px-4 border-t border-neon-purple/20">
