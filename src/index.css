@@ -111,6 +111,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* compensate for fixed navbar (h-16 = 4rem + 1rem extra) */
 }
 
 body {
