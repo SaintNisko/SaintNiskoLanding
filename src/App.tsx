@@ -14,6 +14,32 @@ function App() {
     return () => { document.body.style.overflow = ''; };
   }, [isGameOpen]);
 
+  // Track active section on scroll using IntersectionObserver
+  useEffect(() => {
+    const sections = document.querySelectorAll('section[id]');
+    const navHeight = 64; // h-16 = 4rem = 64px
+
+    const observerOptions = {
+      root: null,
+      rootMargin: `-${navHeight}px 0px -50% 0px`,
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
+
   const schedule = [
     { day: 'Понедельник', activity: 'Отдых', time: null, icon: '😴' },
     { day: 'Вторник', activity: 'Отдых', time: null, icon: '😴' },
@@ -83,7 +109,7 @@ function App() {
                   key={section}
                   href={`#${section}`}
                   onClick={() => setActiveSection(section)}
-                  className={`text-sm uppercase tracking-wider transition-all duration-300 hover:text-neon-purple ${
+                  className={`relative text-sm uppercase tracking-wider transition-all duration-300 hover:text-neon-purple ${
                     activeSection === section ? 'text-neon-purple neon-text' : 'text-gray-300'
                   }`}
                 >
@@ -91,6 +117,9 @@ function App() {
                    section === 'streams' ? 'Стримы' :
                    section === 'schedule' ? 'Расписание' :
                    section === 'social' ? 'Соцсети' : 'Бонус'}
+                  {activeSection === section && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-neon-purple shadow-[0_0_8px_rgba(176,38,255,0.8)]" />
+                  )}
                 </a>
               ))}
             </div>
