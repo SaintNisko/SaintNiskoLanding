@@ -25,9 +25,9 @@ function App() {
   ];
 
   const streamChannels = [
-    { name: 'Twitch', url: 'https://www.twitch.tv/saint_nisko', icon: 'fa-brands fa-twitch', color: '#9146FF' },
-    { name: 'VK Видео Live', url: 'https://live.vkvideo.ru/saint_nisko', icon: 'fa-brands fa-vk', color: '#0077FF' },
-    { name: 'Goodgame', url: 'https://goodgame.ru/Saint_Nisko', icon: 'fa-solid fa-gamepad', color: '#FF6B00' },
+    { name: 'Twitch', url: 'https://www.twitch.tv/saint_nisko', icon: 'fa-brands fa-twitch', color: '#9146FF', isSvg: false },
+    { name: 'VK Видео Live', url: 'https://live.vkvideo.ru/saint_nisko', icon: 'fa-brands fa-vk', color: '#0077FF', isSvg: false },
+    { name: 'Goodgame', url: 'https://goodgame.ru/Saint_Nisko', icon: '', color: '#FF6B00', isSvg: true },
   ];
 
   const socialLinks = [
@@ -67,8 +67,14 @@ function App() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-dark-bg/80 backdrop-blur-md border-b border-neon-purple/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-2">
-              <span className="text-2xl font-bold neon-text">SN</span>
+            <div className="flex items-center space-x-3">
+              <a href="https://www.twitch.tv/saint_nisko" target="_blank" rel="noopener noreferrer" className="flex-shrink-0">
+                <img
+                  src="https://static-cdn.jtvnw.net/jtv_user_pictures/3b4fe4c2-fdf9-498a-aff5-01c15668254a-profile_image-300x300.png"
+                  alt="Saint Nisko"
+                  className="w-10 h-10 rounded-full border-2 border-neon-purple shadow-[0_0_10px_rgba(176,38,255,0.5)] hover:shadow-[0_0_20px_rgba(176,38,255,0.8)] transition-all duration-300"
+                />
+              </a>
               <span className="text-sm text-gray-400 hidden sm:block">Saint Nisko</span>
             </div>
             <div className="hidden md:flex items-center space-x-6">
@@ -116,11 +122,15 @@ function App() {
         {/* Title */}
         <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black text-center mb-4 animate-glow-pulse">
           <span className="neon-text">SAINT</span>{' '}
-          <span className="neon-text-pink">NISKО</span>
+          <span className="neon-text-blue">NISKО</span>
         </h1>
         
-        <p className="text-lg sm:text-xl text-gray-300 text-center mb-8 max-w-2xl px-4">
-          Стример • Геймер • Контент-мейкер
+        <p className="text-lg sm:text-xl text-center mb-8 max-w-2xl px-4">
+          <span className="text-neon-purple">Стример</span>{' '}
+          <span className="text-gray-500">•</span>{' '}
+          <span className="text-neon-blue">Геймер</span>{' '}
+          <span className="text-gray-500">•</span>{' '}
+          <span className="text-neon-purple">Контент-мейкер</span>
         </p>
 
         {/* CTA Buttons */}
@@ -133,7 +143,7 @@ function App() {
           </a>
           <a
             href="#schedule"
-            className="px-8 py-3 bg-transparent border border-neon-pink/50 rounded-full text-neon-pink font-bold uppercase tracking-wider hover:bg-neon-pink/20 hover:border-neon-pink transition-all duration-300"
+            className="px-8 py-3 bg-transparent border border-neon-blue/50 rounded-full text-neon-blue font-bold uppercase tracking-wider hover:bg-neon-blue/20 hover:border-neon-blue transition-all duration-300"
           >
             Расписание
           </a>
@@ -177,7 +187,24 @@ function App() {
                     className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center text-3xl transition-all duration-300 group-hover:scale-110"
                     style={{ backgroundColor: channel.color + '20', boxShadow: `0 0 20px ${channel.color}40` }}
                   >
-                    <i className={`${channel.icon}`} style={{ color: channel.color }} />
+                    {channel.isSvg ? (
+                      <svg viewBox="0 0 64 64" className="w-10 h-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        {/* Gamepad body */}
+                        <path d="M12 28c0-6 4-10 10-10h20c6 0 10 4 10 10v8c0 6-4 12-10 12h-4l-3-4h-6l-3 4h-4c-6 0-10-6-10-12v-8z" fill={channel.color} opacity="0.9"/>
+                        {/* D-pad */}
+                        <rect x="18" y="27" width="3" height="9" rx="1" fill="#0a0014"/>
+                        <rect x="15" y="30" width="9" height="3" rx="1" fill="#0a0014"/>
+                        {/* Buttons */}
+                        <circle cx="42" cy="28" r="2" fill="#0a0014"/>
+                        <circle cx="46" cy="32" r="2" fill="#0a0014"/>
+                        <circle cx="42" cy="36" r="2" fill="#0a0014"/>
+                        <circle cx="38" cy="32" r="2" fill="#0a0014"/>
+                        {/* GG text */}
+                        <text x="32" y="50" textAnchor="middle" fontSize="8" fontWeight="bold" fill={channel.color}>GG</text>
+                      </svg>
+                    ) : (
+                      <i className={`${channel.icon}`} style={{ color: channel.color }} />
+                    )}
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-white group-hover:text-neon-purple transition-colors">
                     {channel.name}
@@ -225,7 +252,7 @@ function App() {
                   </div>
                   {item.time && (
                     <div className="flex items-center gap-3">
-                      <span className="text-neon-pink font-mono font-bold text-lg">
+                      <span className="text-neon-blue font-mono font-bold text-lg">
                         {item.time}
                       </span>
                       {item.day === 'Суббота' ? (
@@ -288,16 +315,19 @@ function App() {
 
           {/* Blog section */}
           <div className="mt-16">
-            <h3 className="text-2xl font-bold text-center mb-8 neon-text-pink">
-              ✍️ БЛОГ
+            <h3 className="text-2xl font-bold text-center mb-8">
+              <span className="neon-text-blue">✍️ БЛОГ</span>
             </h3>
-            <div className="bg-dark-card/60 border border-neon-pink/30 rounded-2xl p-8 backdrop-blur-sm">
+            <div className="bg-dark-card/60 border border-neon-blue/30 rounded-2xl p-8 backdrop-blur-sm">
               <div className="flex flex-col sm:flex-row items-center gap-6">
-                <div className="w-16 h-16 rounded-full bg-neon-pink/20 flex items-center justify-center text-3xl flex-shrink-0">
+                <div className="w-16 h-16 rounded-full bg-neon-blue/20 flex items-center justify-center text-3xl flex-shrink-0">
                   📝
                 </div>
                 <div className="text-center sm:text-left">
-                  <h4 className="text-xl font-bold text-white mb-2">Следи за новостями</h4>
+                  <h4 className="text-xl font-bold mb-2">
+                    <span className="text-neon-purple">Следи</span>{' '}
+                    <span className="text-neon-blue">за новостями</span>
+                  </h4>
                   <p className="text-gray-400 mb-4">
                     Все анонсы, новости и интересные посты — в нашем Telegram-канале
                   </p>
@@ -305,7 +335,7 @@ function App() {
                     href="https://t.me/ro1eplayground"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-2 bg-neon-pink/20 border border-neon-pink/50 rounded-full text-neon-pink font-medium hover:bg-neon-pink/40 transition-all"
+                    className="inline-flex items-center gap-2 px-6 py-2 bg-neon-blue/20 border border-neon-blue/50 rounded-full text-neon-blue font-medium hover:bg-neon-blue/40 transition-all"
                   >
                     <i className="fa-brands fa-telegram" />
                     Перейти в Telegram
@@ -330,15 +360,18 @@ function App() {
           <div className="relative bg-dark-card/80 border-2 border-neon-purple/50 rounded-3xl p-8 sm:p-12 backdrop-blur-sm overflow-hidden animate-border-glow">
             {/* Background decoration */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-neon-purple/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-neon-pink/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-neon-blue/10 rounded-full blur-3xl" />
             
             <div className="relative z-10 text-center">
               <div className="text-6xl sm:text-8xl mb-6 animate-float">🏁</div>
               <h3 className="text-3xl sm:text-4xl font-black mb-4">
-                <span className="neon-text">RIDGE RACER</span>
+                <span className="neon-text">RIDGE </span>
+                <span className="neon-text-blue">RACER</span>
               </h3>
-              <p className="text-gray-300 text-lg mb-2">
-                Легендарная аркадная гонка прямо в браузере!
+              <p className="text-lg mb-2">
+                <span className="text-neon-purple">Легендарная</span>{' '}
+                <span className="text-neon-blue">аркадная гонка</span>{' '}
+                <span className="text-neon-purple">прямо в браузере!</span>
               </p>
               <p className="text-gray-500 text-sm mb-8">
                 Классика PSX, которая не нуждается в представлении. Почувствуй скорость ретровейва!
@@ -346,7 +379,7 @@ function App() {
               
               <button
                 onClick={() => setIsGameOpen(true)}
-                className="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-neon-purple to-neon-pink rounded-full text-white font-bold text-lg uppercase tracking-wider hover:scale-105 transition-transform duration-300 shadow-[0_0_30px_rgba(176,38,255,0.5)] hover:shadow-[0_0_50px_rgba(176,38,255,0.8)] cursor-pointer"
+                className="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-neon-purple to-neon-blue rounded-full text-white font-bold text-lg uppercase tracking-wider hover:scale-105 transition-transform duration-300 shadow-[0_0_30px_rgba(176,38,255,0.5)] hover:shadow-[0_0_50px_rgba(0,240,255,0.8)] cursor-pointer"
               >
                 <i className="fa-solid fa-play" />
                 Играть сейчас
@@ -358,11 +391,11 @@ function App() {
                   Браузерная версия
                 </span>
                 <span className="flex items-center gap-1">
-                  <i className="fa-solid fa-clock text-neon-pink" />
+                  <i className="fa-solid fa-clock text-neon-purple" />
                   Без установки
                 </span>
                 <span className="flex items-center gap-1">
-                  <i className="fa-solid fa-heart text-red-500" />
+                  <i className="fa-solid fa-heart text-neon-blue" />
                   Бесплатно
                 </span>
               </div>
@@ -472,7 +505,7 @@ function App() {
 
             {/* Copyright */}
             <div className="text-gray-600 text-sm text-center">
-              <p>© 2024 Saint Nisko. Все права защищены.</p>
+              <p>© 2026 Saint Nisko. Все права защищены.</p>
               <p className="mt-1 text-xs text-gray-700">Сделано с 💜 в стиле ретровейв</p>
             </div>
           </div>

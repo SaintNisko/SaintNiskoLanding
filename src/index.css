@@ -70,6 +70,11 @@
   text-shadow: 0 0 7px #ff2cf1, 0 0 10px #ff2cf1, 0 0 21px #ff2cf1;
 }
 
+.neon-text-blue {
+  color: #00f0ff;
+  text-shadow: 0 0 7px #00f0ff, 0 0 10px #00f0ff, 0 0 21px #00f0ff, 0 0 42px #00f0ff;
+}
+
 .neon-border {
   border: 1px solid #b026ff;
   box-shadow: 0 0 5px #b026ff, 0 0 10px #b026ff, inset 0 0 5px rgba(176, 38, 255, 0.1);
