@@ -109,13 +109,11 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-3">
-              <a href="https://www.twitch.tv/saint_nisko" target="_blank" rel="noopener noreferrer" className="flex-shrink-0">
-                <img
-                  src="https://static-cdn.jtvnw.net/jtv_user_pictures/3b4fe4c2-fdf9-498a-aff5-01c15668254a-profile_image-300x300.png"
-                  alt="Saint Nisko"
-                  className="w-10 h-10 rounded-full border-2 border-neon-purple shadow-[0_0_10px_rgba(176,38,255,0.5)] hover:shadow-[0_0_20px_rgba(176,38,255,0.8)] transition-all duration-300"
-                />
-              </a>
+              <img
+                src="https://static-cdn.jtvnw.net/jtv_user_pictures/3b4fe4c2-fdf9-498a-aff5-01c15668254a-profile_image-300x300.png"
+                alt="Saint Nisko"
+                className="w-10 h-10 rounded-full border-2 border-neon-purple shadow-[0_0_10px_rgba(176,38,255,0.5)]"
+              />
               <span className="text-sm text-gray-400 hidden sm:block">Saint Nisko</span>
             </div>
             <div className="hidden md:flex items-center space-x-6">
