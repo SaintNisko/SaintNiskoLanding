@@ -14,44 +14,48 @@ function App() {
     return () => { document.body.style.overflow = ''; };
   }, [isGameOpen]);
 
-  // Track active section on scroll using IntersectionObserver
+  // Track active section on scroll - highlight when section is centered
   useEffect(() => {
-    // Check if IntersectionObserver is supported
-    if (typeof IntersectionObserver === 'undefined') {
-      console.warn('IntersectionObserver is not supported in this browser');
-      return;
-    }
+    const handleScroll = () => {
+      const sections = document.querySelectorAll('section[id]');
+      const viewportCenter = window.innerHeight / 2;
+      
+      let closestSection = 'home';
+      let minDistance = Infinity;
 
-    const sections = document.querySelectorAll('section[id]');
-    const navHeight = 64; // h-16 = 4rem = 64px
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const sectionCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(sectionCenter - viewportCenter);
 
-    const observerOptions = {
-      root: null,
-      rootMargin: `-${navHeight}px 0px -50% 0px`,
-      threshold: 0
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestSection = section.id;
+        }
+      });
+
+      setActiveSection(closestSection);
     };
 
-    let observer: IntersectionObserver | null = null;
+    // Initial check
+    handleScroll();
 
-    try {
-      observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
+    // Add scroll listener with throttle
+    let ticking = false;
+    const throttledScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
         });
-      }, observerOptions);
+        ticking = true;
+      }
+    };
 
-      sections.forEach((section) => observer!.observe(section));
-    } catch (error) {
-      console.error('Failed to initialize IntersectionObserver:', error);
-    }
+    window.addEventListener('scroll', throttledScroll, { passive: true });
 
     return () => {
-      if (observer) {
-        sections.forEach((section) => observer!.unobserve(section));
-        observer.disconnect();
-      }
+      window.removeEventListener('scroll', throttledScroll);
     };
   }, []);
 
