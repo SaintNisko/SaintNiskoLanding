@@ -16,6 +16,12 @@ function App() {
 
   // Track active section on scroll using IntersectionObserver
   useEffect(() => {
+    // Check if IntersectionObserver is supported
+    if (typeof IntersectionObserver === 'undefined') {
+      console.warn('IntersectionObserver is not supported in this browser');
+      return;
+    }
+
     const sections = document.querySelectorAll('section[id]');
     const navHeight = 64; // h-16 = 4rem = 64px
 
@@ -25,18 +31,27 @@ function App() {
       threshold: 0
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    }, observerOptions);
+    let observer: IntersectionObserver | null = null;
 
-    sections.forEach((section) => observer.observe(section));
+    try {
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach((section) => observer!.observe(section));
+    } catch (error) {
+      console.error('Failed to initialize IntersectionObserver:', error);
+    }
 
     return () => {
-      sections.forEach((section) => observer.unobserve(section));
+      if (observer) {
+        sections.forEach((section) => observer!.unobserve(section));
+        observer.disconnect();
+      }
     };
   }, []);
 
