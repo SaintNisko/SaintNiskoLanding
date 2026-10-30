@@ -190,16 +190,12 @@ function App() {
 
         {/* Title */}
         <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black text-center mb-4 animate-glow-pulse">
-          <span className="neon-text">SAINT</span>{' '}
-          <span className="neon-text-blue">NISKО</span>
+          <span className="gradient-text">ROLEPLAYGROUND</span>
         </h1>
         
         <p className="text-lg sm:text-xl text-center mb-8 max-w-2xl px-4">
-          <span className="text-neon-purple">Стример</span>{' '}
-          <span className="text-gray-500">•</span>{' '}
-          <span className="text-neon-blue">Геймер</span>{' '}
-          <span className="text-gray-500">•</span>{' '}
-          <span className="text-neon-purple">Контент-мейкер</span>
+          <span className="text-neon-purple">Игровая площадка</span>{' '}
+          <span className="text-neon-blue">для любых ролей</span>
         </p>
 
         {/* CTA Buttons */}
