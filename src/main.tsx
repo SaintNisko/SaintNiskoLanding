@@ -32,7 +32,7 @@ class ErrorBoundary extends React.Component<
           justifyContent: 'center',
           backgroundColor: '#0a0014',
           color: '#b026ff',
-          fontFamily: 'system-ui, -apple-system, sans-serif',
+          fontFamily: "'Orbitron', system-ui, -apple-system, sans-serif",
           padding: '20px',
           textAlign: 'center'
         }}>
