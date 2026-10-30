@@ -182,7 +182,7 @@ function App() {
       {/* Hero Section */}
       <section id="home" className="relative flex flex-col items-center justify-center pt-16" style={{ minHeight: '100dvh' }}>
         {/* Retro Sun */}
-        <div className="relative mb-8">
+        <div className="relative mb-8 pointer-events-none">
           <div className="retro-sun w-48 h-48 sm:w-64 sm:h-64 animate-float" />
           {/* Sun glow */}
           <div className="absolute inset-0 w-48 h-48 sm:w-64 sm:h-64 rounded-full bg-neon-purple/20 blur-3xl" />
@@ -199,7 +199,7 @@ function App() {
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-wrap gap-4 justify-center px-4">
+        <div className="relative z-10 flex flex-wrap gap-4 justify-center px-4">
           <a
             href="#streams"
             className="px-8 py-3 bg-neon-purple/20 border border-neon-purple rounded-full text-neon-purple font-bold uppercase tracking-wider hover:bg-neon-purple/40 transition-all duration-300 animate-border-glow"
@@ -215,17 +215,16 @@ function App() {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float pointer-events-none">
           <div className="w-6 h-10 border-2 border-neon-purple/50 rounded-full flex items-start justify-center p-2">
             <div className="w-1 h-3 bg-neon-purple rounded-full animate-pulse" />
           </div>
         </div>
 
-        {/* Retro grid floor */}
-        <div className="absolute bottom-0 left-0 right-0 h-48 overflow-hidden opacity-30">
-          <div className="retro-grid w-full h-full" />
-        </div>
-      </section>
+  {/* Retro grid floor */}
+  <div className="absolute bottom-0 left-0 right-0 h-48 overflow-hidden opacity-30 pointer-events-none">
+    <div className="retro-grid w-full h-full" />
+  </div>      </section>
 
       {/* Streams Section */}
       <section id="streams" className="relative py-20 px-4">
