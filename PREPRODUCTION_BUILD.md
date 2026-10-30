@@ -19,7 +19,7 @@ dist/
 ✅ Поддержка всех современных браузеров  
 ✅ Адаптивный дизайн  
 ✅ Все функции работают:
-  - Стримы (Twitch, VK Видео Live, Goodgame)
+  - Стримы (Twitch, VK Video Live, Goodgame)
   - Расписание с ссылками на каналы
   - Социальные сети (Telegram, Discord, Threads, Instagram)
   - Блог (Telegram канал)
