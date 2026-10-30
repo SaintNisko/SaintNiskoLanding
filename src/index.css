@@ -112,11 +112,77 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem; /* compensate for fixed navbar (h-16 = 4rem + 1rem extra) */
+  /* iOS Safari safe area support */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 body {
   background: #0a0014;
   overflow-x: hidden;
+  /* Prevent iOS text size adjust */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Remove tap highlight on mobile */
+  -webkit-tap-highlight-color: transparent;
+  /* Smooth touch scrolling */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Use dvh for mobile browsers with dynamic viewport */
+.min-h-screen-dvh {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Mobile-specific fixes */
+@media (max-width: 640px) {
+  /* Prevent zoom on input focus */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+  
+  /* Better touch targets */
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Reduce animations on mobile for performance */
+  .animate-glow-pulse,
+  .animate-float,
+  .animate-border-glow {
+    animation-duration: 4s !important;
+  }
+  
+  /* Smaller blur effects on mobile */
+  .blur-3xl {
+    filter: blur(2rem) !important;
+  }
+}
+
+/* Touch devices */
+@media (hover: none) and (pointer: coarse) {
+  /* Disable hover effects on touch devices */
+  .card-hover:hover {
+    transform: none;
+    box-shadow: 0 0 5px #b026ff, 0 0 10px #b026ff, inset 0 0 5px rgba(176, 38, 255, 0.1);
+  }
+  
+  /* Active state for touch feedback */
+  a:active, button:active {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+}
+
+/* Prevent overscroll bounce on iOS */
+html, body {
+  overscroll-behavior: none;
+}
+
+/* Better scrolling on iOS */
+* {
+  -webkit-overflow-scrolling: touch;
 }
 
 ::-webkit-scrollbar {
