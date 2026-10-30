@@ -82,7 +82,6 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 10px rgba(176, 38, 255, 0.5));
 }
 
 .neon-border {

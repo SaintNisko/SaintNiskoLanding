@@ -189,7 +189,7 @@ function App() {
         </div>
 
         {/* Title */}
-        <h1 className="font-black text-center mb-4 animate-glow-pulse" style={{ fontSize: 'clamp(38px, 8vw, 86px)' }}>
+        <h1 className="font-black text-center mb-4" style={{ fontSize: 'clamp(38px, 8vw, 86px)' }}>
           <span className="gradient-text">ROLEPLAYGROUND</span>
         </h1>
         
