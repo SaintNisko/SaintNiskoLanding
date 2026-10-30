@@ -21,6 +21,27 @@
   50% { text-shadow: 0 0 5px #b026ff, 0 0 10px #b026ff, 0 0 20px #b026ff, 0 0 40px #b026ff; }
 }
 
+@keyframes glowPulseTight {
+  0%, 100% { 
+    filter: 
+      drop-shadow(2px 0 3px rgba(176, 38, 255, 0.7))
+      drop-shadow(-2px 0 3px rgba(176, 38, 255, 0.7))
+      drop-shadow(0 2px 3px rgba(176, 38, 255, 0.7))
+      drop-shadow(0 -2px 3px rgba(176, 38, 255, 0.7))
+      drop-shadow(0 0 8px rgba(176, 38, 255, 0.5))
+      drop-shadow(0 0 15px rgba(0, 240, 255, 0.3));
+  }
+  50% { 
+    filter: 
+      drop-shadow(1px 0 2px rgba(176, 38, 255, 0.5))
+      drop-shadow(-1px 0 2px rgba(176, 38, 255, 0.5))
+      drop-shadow(0 1px 2px rgba(176, 38, 255, 0.5))
+      drop-shadow(0 -1px 2px rgba(176, 38, 255, 0.5))
+      drop-shadow(0 0 5px rgba(176, 38, 255, 0.3))
+      drop-shadow(0 0 10px rgba(0, 240, 255, 0.2));
+  }
+}
+
 @keyframes floatUp {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -82,6 +103,10 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.neon-glow-tight {
+  animation: glowPulseTight 3s ease-in-out infinite;
 }
 
 .neon-border {
