@@ -21,6 +21,8 @@
   50% { text-shadow: 0 0 5px #b026ff, 0 0 10px #b026ff, 0 0 20px #b026ff, 0 0 40px #b026ff; }
 }
 
+
+
 @keyframes floatUp {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -77,6 +79,15 @@
   text-shadow: 0 0 7px #00f0ff, 0 0 10px #00f0ff, 0 0 21px #00f0ff, 0 0 42px #00f0ff;
 }
 
+.gradient-text {
+  background: linear-gradient(90deg, #b026ff 0%, #00f0ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+
 .neon-border {
   border: 1px solid #b026ff;
   box-shadow: 0 0 5px #b026ff, 0 0 10px #b026ff, inset 0 0 5px rgba(176, 38, 255, 0.1);
@@ -89,7 +100,7 @@
 }
 
 .retro-sun {
-  background: linear-gradient(180deg, #ff2cf1 0%, #b026ff 40%, #00f0ff 100%);
+  background: linear-gradient(180deg, #ff6b00 0%, #b026ff 100%);
   border-radius: 50%;
   position: relative;
   overflow: hidden;
