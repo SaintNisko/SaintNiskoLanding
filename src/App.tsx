@@ -1,17 +1,40 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [isGameOpen, setIsGameOpen] = useState(false);
 
-  // Lock body scroll when game modal is open
+  // Generate stars once to prevent flickering on re-renders
+  const stars = useMemo(() => {
+    return Array.from({ length: 50 }).map(() => ({
+      width: Math.random() * 2 + 1,
+      height: Math.random() * 2 + 1,
+      top: Math.random() * 60,
+      left: Math.random() * 100,
+      opacity: Math.random() * 0.7 + 0.3,
+      duration: Math.random() * 3 + 2,
+      delay: Math.random() * 2,
+    }));
+  }, []);
+
+  // Lock body scroll when game modal is open (iOS compatible)
   useEffect(() => {
     if (isGameOpen) {
+      // For iOS Safari, we need to prevent scroll differently
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+      
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, scrollY);
+      };
     }
-    return () => { document.body.style.overflow = ''; };
   }, [isGameOpen]);
 
   // Track active section on scroll - highlight when section is centered
@@ -83,25 +106,25 @@ function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-dark-bg text-white font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-dark-bg text-white font-sans relative overflow-x-hidden" style={{ minHeight: '100dvh' }}>
       {/* Background effects */}
       <div className="fixed inset-0 pointer-events-none">
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-dark-bg via-dark-surface to-dark-bg opacity-90" />
         {/* Stars */}
         <div className="absolute inset-0">
-          {Array.from({ length: 50 }).map((_, i) => (
+          {stars.map((star, i) => (
             <div
               key={i}
               className="absolute rounded-full bg-white"
               style={{
-                width: Math.random() * 2 + 1 + 'px',
-                height: Math.random() * 2 + 1 + 'px',
-                top: Math.random() * 60 + '%',
-                left: Math.random() * 100 + '%',
-                opacity: Math.random() * 0.7 + 0.3,
-                animation: `glowPulse ${Math.random() * 3 + 2}s ease-in-out infinite`,
-                animationDelay: Math.random() * 2 + 's',
+                width: `${star.width}px`,
+                height: `${star.height}px`,
+                top: `${star.top}%`,
+                left: `${star.left}%`,
+                opacity: star.opacity,
+                animation: `glowPulse ${star.duration}s ease-in-out infinite`,
+                animationDelay: `${star.delay}s`,
               }}
             />
           ))}
@@ -109,7 +132,7 @@ function App() {
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-dark-bg/80 backdrop-blur-md border-b border-neon-purple/30">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-dark-bg/80 backdrop-blur-md border-b border-neon-purple/30" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-3">
@@ -157,7 +180,7 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex flex-col items-center justify-center pt-16">
+      <section id="home" className="relative flex flex-col items-center justify-center pt-16" style={{ minHeight: '100dvh' }}>
         {/* Retro Sun */}
         <div className="relative mb-8">
           <div className="retro-sun w-48 h-48 sm:w-64 sm:h-64 animate-float" />
@@ -468,32 +491,33 @@ function App() {
 
       {/* Game Modal */}
       {isGameOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center sm:p-4 p-0">
           {/* Backdrop */}
           <div
             className="absolute inset-0 bg-black/90 backdrop-blur-sm"
             onClick={() => setIsGameOpen(false)}
           />
           
-          {/* Modal Content */}
-          <div className="relative w-full max-w-5xl bg-dark-card border-2 border-neon-purple rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(176,38,255,0.5)] animate-border-glow">
+          {/* Modal Content - Full screen on mobile, centered on desktop */}
+          <div className="relative w-full h-full sm:h-auto sm:max-h-[95vh] sm:max-w-5xl bg-dark-card sm:border-2 border-neon-purple sm:rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(176,38,255,0.5)] animate-border-glow flex flex-col">
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 bg-dark-surface border-b border-neon-purple/30">
-              <div className="flex items-center gap-3">
-                <span className="text-2xl">🏎️</span>
-                <h3 className="text-lg font-bold neon-text">RIDGE RACER</h3>
+            <div className="flex items-center justify-between px-3 sm:px-6 py-3 sm:py-4 bg-dark-surface border-b border-neon-purple/30 flex-shrink-0" style={{ paddingTop: 'calc(env(safe-area-inset-top) + 0.75rem)' }}>
+              <div className="flex items-center gap-2 sm:gap-3">
+                <span className="text-xl sm:text-2xl">🏎️</span>
+                <h3 className="text-sm sm:text-lg font-bold neon-text">RIDGE RACER</h3>
                 <span className="text-xs text-gray-500 hidden sm:inline">PlayStation Classic</span>
               </div>
               <button
                 onClick={() => setIsGameOpen(false)}
-                className="w-10 h-10 rounded-full bg-red-500/20 border border-red-500/50 flex items-center justify-center text-red-400 hover:bg-red-500/40 hover:text-white transition-all duration-300"
+                className="w-10 h-10 rounded-full bg-red-500/20 border border-red-500/50 flex items-center justify-center text-red-400 hover:bg-red-500/40 hover:text-white transition-all duration-300 flex-shrink-0"
+                aria-label="Закрыть"
               >
                 <i className="fa-solid fa-xmark text-lg" />
               </button>
             </div>
             
-            {/* Game iframe */}
-            <div className="relative w-full" style={{ paddingBottom: '75%' }}>
+            {/* Game iframe - Takes remaining space */}
+            <div className="relative flex-1 w-full bg-black">
               <iframe
                 src="https://www.retrogames.cc/embed/41555-ridge-racer.html"
                 className="absolute top-0 left-0 w-full h-full border-0"
@@ -503,8 +527,8 @@ function App() {
               />
             </div>
             
-            {/* Footer info */}
-            <div className="px-6 py-3 bg-dark-surface border-t border-neon-purple/30 flex flex-wrap items-center justify-between gap-2">
+            {/* Footer info - Hidden on mobile for more game space */}
+            <div className="hidden sm:flex px-6 py-3 bg-dark-surface border-t border-neon-purple/30 flex-wrap items-center justify-between gap-2 flex-shrink-0">
               <div className="flex items-center gap-4 text-xs text-gray-500">
                 <span className="flex items-center gap-1">
                   <i className="fa-solid fa-keyboard text-neon-blue" />
@@ -529,7 +553,7 @@ function App() {
       )}
 
       {/* Footer */}
-      <footer className="relative py-12 px-4 border-t border-neon-purple/20">
+      <footer className="relative py-12 px-4 border-t border-neon-purple/20" style={{ paddingBottom: 'calc(3rem + env(safe-area-inset-bottom))' }}>
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col items-center gap-6">
             {/* Logo */}
