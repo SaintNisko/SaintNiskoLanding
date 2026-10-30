@@ -94,7 +94,7 @@ function App() {
 
   const streamChannels = [
     { name: 'Twitch', url: 'https://www.twitch.tv/saint_nisko', icon: 'fa-brands fa-twitch', color: '#9146FF', isSvg: false },
-    { name: 'VK Видео Live', url: 'https://live.vkvideo.ru/saint_nisko', icon: 'fa-brands fa-vk', color: '#0077FF', isSvg: false },
+    { name: 'VK Video Live', url: 'https://live.vkvideo.ru/saint_nisko', icon: 'fa-brands fa-vk', color: '#0077FF', isSvg: false },
     { name: 'Goodgame', url: 'https://goodgame.ru/Saint_Nisko', icon: '', color: '#FF6B00', isSvg: true },
   ];
 
