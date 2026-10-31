@@ -486,7 +486,7 @@ function App() {
 
       {/* Game Modal */}
       {isGameOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center sm:p-4 p-0">
+        <div className="fixed inset-0 z-[100] sm:flex sm:items-center sm:justify-center sm:p-4">
           {/* Backdrop */}
           <div
             className="absolute inset-0 bg-black/90 backdrop-blur-sm"
@@ -494,7 +494,7 @@ function App() {
           />
           
           {/* Modal Content - Full screen on mobile, centered on desktop */}
-          <div className="relative w-full h-full sm:h-auto sm:max-h-[95vh] sm:max-w-5xl bg-dark-card sm:border-2 border-neon-purple sm:rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(176,38,255,0.5)] animate-border-glow flex flex-col">
+          <div className="relative w-full h-full sm:h-auto sm:max-h-[95vh] sm:max-w-5xl bg-dark-card sm:border-2 border-neon-purple sm:rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(176,38,255,0.5)] animate-border-glow flex flex-col z-10">
             {/* Header */}
             <div className="flex items-center justify-between px-3 sm:px-6 py-3 sm:py-4 bg-dark-surface border-b border-neon-purple/30 flex-shrink-0" style={{ paddingTop: 'calc(env(safe-area-inset-top) + 0.75rem)' }}>
               <div className="flex items-center gap-2 sm:gap-3">
@@ -512,7 +512,7 @@ function App() {
             </div>
             
             {/* Game iframe - Takes remaining space */}
-            <div className="relative flex-1 w-full bg-black">
+            <div className="relative w-full bg-black flex-1 sm:flex-none" style={{ minHeight: '400px', height: 'calc(100dvh - 140px)' }}>
               <iframe
                 src="https://www.retrogames.cc/embed/41555-ridge-racer.html"
                 className="absolute top-0 left-0 w-full h-full border-0"
