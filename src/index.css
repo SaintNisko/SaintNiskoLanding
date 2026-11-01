@@ -84,9 +84,6 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
 }
 
 

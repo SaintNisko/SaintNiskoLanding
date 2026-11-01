@@ -189,8 +189,8 @@ function App() {
         </div>
 
         {/* Title */}
-        <h1 className="font-black text-center mb-4 px-2" style={{ fontSize: 'clamp(24px, 7vw, 86px)', maxWidth: '100%' }}>
-          <span className="gradient-text break-words">ROLEPLAYGROUND</span>
+        <h1 className="font-black text-center mb-4 px-2" style={{ fontSize: 'clamp(18px, 5vw, 86px)', maxWidth: '100%' }}>
+          <span className="gradient-text" style={{ whiteSpace: 'nowrap' }}>ROLEPLAYGROUND</span>
         </h1>
         
         <p className="text-lg sm:text-xl text-center mb-8 max-w-2xl px-4">
