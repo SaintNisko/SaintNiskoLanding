@@ -163,13 +163,14 @@ function App() {
                 </a>
               ))}
             </div>
-            {/* Mobile menu */}
+            {/* Mobile menu - right aligned */}
             <div className="md:hidden flex items-center space-x-4">
               {['streams', 'schedule', 'social'].map((section) => (
                 <a
                   key={section}
                   href={`#${section}`}
-                  className="text-xs text-gray-400 hover:text-neon-purple transition-colors"
+                  className="text-lg text-gray-400 hover:text-neon-purple transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                  aria-label={section === 'streams' ? 'Стримы' : section === 'schedule' ? 'Расписание' : 'Соцсети'}
                 >
                   {section === 'streams' ? '📺' : section === 'schedule' ? '📅' : '🌐'}
                 </a>
@@ -189,8 +190,8 @@ function App() {
         </div>
 
         {/* Title */}
-        <h1 className="font-black text-center mb-4" style={{ fontSize: 'clamp(38px, 8vw, 86px)' }}>
-          <span className="gradient-text">ROLEPLAYGROUND</span>
+        <h1 className="font-black text-center mb-4 px-2" style={{ fontSize: 'clamp(18px, 5vw, 86px)', maxWidth: '100%' }}>
+          <span className="gradient-text" style={{ whiteSpace: 'nowrap' }}>ROLEPLAYGROUND</span>
         </h1>
         
         <p className="text-lg sm:text-xl text-center mb-8 max-w-2xl px-4">
@@ -465,16 +466,18 @@ function App() {
                 Играть сейчас
               </button>
               
-              <div className="mt-8 flex items-center justify-center gap-4 text-sm text-gray-500">
-                <span className="flex items-center gap-1">
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500">
+                <span className="flex items-center gap-1 whitespace-nowrap">
                   <i className="fa-solid fa-globe text-neon-blue" />
                   Браузерная версия
                 </span>
-                <span className="flex items-center gap-1">
+                <span className="hidden sm:inline text-gray-700">•</span>
+                <span className="flex items-center gap-1 whitespace-nowrap">
                   <i className="fa-solid fa-clock text-neon-purple" />
                   Без установки
                 </span>
-                <span className="flex items-center gap-1">
+                <span className="hidden sm:inline text-gray-700">•</span>
+                <span className="flex items-center gap-1 whitespace-nowrap">
                   <i className="fa-solid fa-heart text-neon-blue" />
                   Бесплатно
                 </span>
