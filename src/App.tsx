@@ -444,11 +444,14 @@ function App() {
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-neon-blue/10 rounded-full blur-3xl" />
             
             <div className="relative z-10 text-center">
-              <div className="text-6xl sm:text-8xl mb-6 animate-float">🏁</div>
-              <h3 className="text-3xl sm:text-4xl font-black mb-4">
-                <span className="neon-text">RIDGE </span>
-                <span className="neon-text-blue">RACER</span>
-              </h3>
+              <div className="mb-6 animate-float">
+                <img 
+                  src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/11a10a01-ac23-4fea-ad5a-b51f53084159/d6bfbjl-b90c0c87-e297-439e-9195-759ba1c0be61.png/v1/fill/w_1529,h_523/ridge_racer_logo_by_ringostarr39_d6bfbjl-pre.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTAyNiIsInBhdGgiOiIvZi8xMWExMGEwMS1hYzIzLTRmZWEtYWQ1YS1iNTFmNTMwODQxNTkvZDZiZmJqbC1iOTBjMGM4Ny1lMjk3LTQzOWUtOTE5NS03NTliYTFjMGJlNjEucG5nIiwid2lkdGgiOiI8PTMwMDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.EVIKD6UaGiZfEd5dTmsxK_-d5TiOjuABITMXK2tOezw"
+                  alt="Ridge Racer Logo"
+                  className="max-w-[280px] sm:max-w-[400px] h-auto mx-auto"
+                  style={{ filter: 'drop-shadow(0 0 20px rgba(176, 38, 255, 0.5))' }}
+                />
+              </div>
               <p className="text-lg mb-2">
                 <span className="text-neon-purple">Легендарная</span>{' '}
                 <span className="text-neon-blue">аркадная гонка</span>{' '}
