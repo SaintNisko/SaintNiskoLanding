@@ -466,16 +466,18 @@ function App() {
                 Играть сейчас
               </button>
               
-              <div className="mt-8 flex items-center justify-center gap-4 text-sm text-gray-500">
-                <span className="flex items-center gap-1">
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500">
+                <span className="flex items-center gap-1 whitespace-nowrap">
                   <i className="fa-solid fa-globe text-neon-blue" />
                   Браузерная версия
                 </span>
-                <span className="flex items-center gap-1">
+                <span className="hidden sm:inline text-gray-700">•</span>
+                <span className="flex items-center gap-1 whitespace-nowrap">
                   <i className="fa-solid fa-clock text-neon-purple" />
                   Без установки
                 </span>
-                <span className="flex items-center gap-1">
+                <span className="hidden sm:inline text-gray-700">•</span>
+                <span className="flex items-center gap-1 whitespace-nowrap">
                   <i className="fa-solid fa-heart text-neon-blue" />
                   Бесплатно
                 </span>
