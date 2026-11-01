@@ -134,7 +134,7 @@ function App() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-dark-bg/80 backdrop-blur-md border-b border-neon-purple/30" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center h-16 relative">
             <div className="flex items-center space-x-3">
               <img
                 src="https://static-cdn.jtvnw.net/jtv_user_pictures/3b4fe4c2-fdf9-498a-aff5-01c15668254a-profile_image-300x300.png"
@@ -163,13 +163,14 @@ function App() {
                 </a>
               ))}
             </div>
-            {/* Mobile menu */}
-            <div className="md:hidden flex items-center space-x-4">
+            {/* Mobile menu - centered */}
+            <div className="md:hidden absolute left-1/2 -translate-x-1/2 flex items-center space-x-6">
               {['streams', 'schedule', 'social'].map((section) => (
                 <a
                   key={section}
                   href={`#${section}`}
-                  className="text-xs text-gray-400 hover:text-neon-purple transition-colors"
+                  className="text-lg text-gray-400 hover:text-neon-purple transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                  aria-label={section === 'streams' ? 'Стримы' : section === 'schedule' ? 'Расписание' : 'Соцсети'}
                 >
                   {section === 'streams' ? '📺' : section === 'schedule' ? '📅' : '🌐'}
                 </a>
