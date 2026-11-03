@@ -221,8 +221,8 @@ function App() {
           </a>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float pointer-events-none">
+        {/* Scroll indicator - hidden on mobile */}
+        <div className="hidden sm:block absolute bottom-8 left-1/2 -translate-x-1/2 animate-float pointer-events-none">
           <div className="w-6 h-10 border-2 border-neon-purple/50 rounded-full flex items-start justify-center p-2">
             <div className="w-1 h-3 bg-neon-purple rounded-full animate-pulse" />
           </div>
