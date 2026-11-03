@@ -329,17 +329,17 @@ function App() {
                       {item.day === 'Суббота' ? (
                         <div className="flex gap-2">
                           <a href="https://www.twitch.tv/saint_nisko" target="_blank" rel="noopener noreferrer" 
-                            className="px-3 py-1 bg-neon-purple/20 border border-neon-purple/50 rounded-full text-xs text-neon-purple hover:bg-neon-purple/40 transition-all">
+                            className="flex items-center justify-center px-3 py-1 min-h-[32px] bg-neon-purple/20 border border-neon-purple/50 rounded-full text-xs text-neon-purple hover:bg-neon-purple/40 transition-all">
                             Twitch
                           </a>
                           <a href="https://live.vkvideo.ru/saint_nisko" target="_blank" rel="noopener noreferrer"
-                            className="px-3 py-1 bg-blue-500/20 border border-blue-500/50 rounded-full text-xs text-blue-400 hover:bg-blue-500/40 transition-all">
+                            className="flex items-center justify-center px-3 py-1 min-h-[32px] bg-blue-500/20 border border-blue-500/50 rounded-full text-xs text-blue-400 hover:bg-blue-500/40 transition-all">
                             VK
                           </a>
                         </div>
                       ) : (
                         <a href="https://www.twitch.tv/saint_nisko" target="_blank" rel="noopener noreferrer"
-                          className="px-3 py-1 bg-neon-purple/20 border border-neon-purple/50 rounded-full text-xs text-neon-purple hover:bg-neon-purple/40 transition-all">
+                          className="flex items-center justify-center px-3 py-1 min-h-[32px] bg-neon-purple/20 border border-neon-purple/50 rounded-full text-xs text-neon-purple hover:bg-neon-purple/40 transition-all">
                           Смотреть →
                         </a>
                       )}
