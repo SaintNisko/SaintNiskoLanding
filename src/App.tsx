@@ -5,8 +5,12 @@ function App() {
   const [isGameOpen, setIsGameOpen] = useState(false);
 
   // Generate stars once to prevent flickering on re-renders
+  // Use fewer stars on mobile for better performance
   const stars = useMemo(() => {
-    return Array.from({ length: 50 }).map(() => ({
+    const isMobile = window.innerWidth < 640;
+    const starCount = isMobile ? 20 : 50;
+    
+    return Array.from({ length: starCount }).map(() => ({
       width: Math.random() * 2 + 1,
       height: Math.random() * 2 + 1,
       top: Math.random() * 60,
@@ -132,7 +136,7 @@ function App() {
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-dark-bg/80 backdrop-blur-md border-b border-neon-purple/30" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-dark-bg/95 sm:bg-dark-bg/80 sm:backdrop-blur-md border-b border-neon-purple/30" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-3">
@@ -140,6 +144,8 @@ function App() {
                 src="https://static-cdn.jtvnw.net/jtv_user_pictures/3b4fe4c2-fdf9-498a-aff5-01c15668254a-profile_image-300x300.png"
                 alt="Saint Nisko"
                 className="w-10 h-10 rounded-full border-2 border-neon-purple shadow-[0_0_10px_rgba(176,38,255,0.5)]"
+                loading="eager"
+                decoding="async"
               />
               <span className="text-sm text-gray-400 hidden sm:block">Saint Nisko</span>
             </div>
@@ -185,8 +191,8 @@ function App() {
         {/* Retro Sun */}
         <div className="relative mb-8 pointer-events-none">
           <div className="retro-sun w-48 h-48 sm:w-64 sm:h-64 animate-float" />
-          {/* Sun glow */}
-          <div className="absolute inset-0 w-48 h-48 sm:w-64 sm:h-64 rounded-full bg-neon-purple/20 blur-3xl" />
+          {/* Sun glow - disabled on mobile for performance */}
+          <div className="hidden sm:block absolute inset-0 w-48 h-48 sm:w-64 sm:h-64 rounded-full bg-neon-purple/20 blur-3xl" />
         </div>
 
         {/* Title */}
@@ -215,8 +221,8 @@ function App() {
           </a>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float pointer-events-none">
+        {/* Scroll indicator - hidden on mobile */}
+        <div className="hidden sm:block absolute bottom-8 left-1/2 -translate-x-1/2 animate-float pointer-events-none">
           <div className="w-6 h-10 border-2 border-neon-purple/50 rounded-full flex items-start justify-center p-2">
             <div className="w-1 h-3 bg-neon-purple rounded-full animate-pulse" />
           </div>
@@ -323,17 +329,17 @@ function App() {
                       {item.day === 'Суббота' ? (
                         <div className="flex gap-2">
                           <a href="https://www.twitch.tv/saint_nisko" target="_blank" rel="noopener noreferrer" 
-                            className="px-3 py-1 bg-neon-purple/20 border border-neon-purple/50 rounded-full text-xs text-neon-purple hover:bg-neon-purple/40 transition-all">
+                            className="flex items-center justify-center px-3 py-1 min-h-[32px] bg-neon-purple/20 border border-neon-purple/50 rounded-full text-xs text-neon-purple hover:bg-neon-purple/40 transition-all">
                             Twitch
                           </a>
                           <a href="https://live.vkvideo.ru/saint_nisko" target="_blank" rel="noopener noreferrer"
-                            className="px-3 py-1 bg-blue-500/20 border border-blue-500/50 rounded-full text-xs text-blue-400 hover:bg-blue-500/40 transition-all">
+                            className="flex items-center justify-center px-3 py-1 min-h-[32px] bg-blue-500/20 border border-blue-500/50 rounded-full text-xs text-blue-400 hover:bg-blue-500/40 transition-all">
                             VK
                           </a>
                         </div>
                       ) : (
                         <a href="https://www.twitch.tv/saint_nisko" target="_blank" rel="noopener noreferrer"
-                          className="px-3 py-1 bg-neon-purple/20 border border-neon-purple/50 rounded-full text-xs text-neon-purple hover:bg-neon-purple/40 transition-all">
+                          className="flex items-center justify-center px-3 py-1 min-h-[32px] bg-neon-purple/20 border border-neon-purple/50 rounded-full text-xs text-neon-purple hover:bg-neon-purple/40 transition-all">
                           Смотреть →
                         </a>
                       )}
@@ -438,10 +444,10 @@ function App() {
             Специальная плюшка для настоящих фанатов
           </p>
 
-          <div className="relative bg-dark-card/80 border-2 border-neon-purple/50 rounded-3xl p-8 sm:p-12 backdrop-blur-sm overflow-hidden animate-border-glow">
-            {/* Background decoration */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-neon-purple/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-neon-blue/10 rounded-full blur-3xl" />
+          <div className="relative bg-dark-card/90 sm:bg-dark-card/80 sm:backdrop-blur-sm border-2 border-neon-purple/50 rounded-3xl p-8 sm:p-12 overflow-hidden animate-border-glow">
+            {/* Background decoration - simplified for mobile */}
+            <div className="hidden sm:block absolute top-0 right-0 w-64 h-64 bg-neon-purple/10 rounded-full blur-3xl" />
+            <div className="hidden sm:block absolute bottom-0 left-0 w-48 h-48 bg-neon-blue/10 rounded-full blur-3xl" />
             
             <div className="relative z-10 text-center">
               <div className="mb-6 w-full">
@@ -449,7 +455,11 @@ function App() {
                   src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/11a10a01-ac23-4fea-ad5a-b51f53084159/d6bfbjl-b90c0c87-e297-439e-9195-759ba1c0be61.png/v1/fill/w_1529,h_523/ridge_racer_logo_by_ringostarr39_d6bfbjl-pre.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTAyNiIsInBhdGgiOiIvZi8xMWExMGEwMS1hYzIzLTRmZWEtYWQ1YS1iNTFmNTMwODQxNTkvZDZiZmJqbC1iOTBjMGM4Ny1lMjk3LTQzOWUtOTE5NS03NTliYTFjMGJlNjEucG5nIiwid2lkdGgiOiI8PTMwMDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.EVIKD6UaGiZfEd5dTmsxK_-d5TiOjuABITMXK2tOezw"
                   alt="Ridge Racer Logo"
                   className="w-full max-w-full sm:max-w-[400px] h-auto mx-auto object-contain"
-                  style={{ filter: 'drop-shadow(0 0 20px rgba(176, 38, 255, 0.5))' }}
+                  loading="lazy"
+                  style={{ 
+                    filter: 'drop-shadow(0 0 15px rgba(176, 38, 255, 0.4))',
+                    willChange: 'auto'
+                  }}
                 />
               </div>
               <p className="text-lg mb-2">
@@ -493,9 +503,9 @@ function App() {
       {/* Game Modal */}
       {isGameOpen && (
         <div className="fixed inset-0 z-[100] sm:flex sm:items-center sm:justify-center sm:p-4">
-          {/* Backdrop */}
+          {/* Backdrop - simplified for mobile */}
           <div
-            className="absolute inset-0 bg-black/90 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/95 sm:bg-black/90 sm:backdrop-blur-sm"
             onClick={() => setIsGameOpen(false)}
           />
           
