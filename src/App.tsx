@@ -568,7 +568,7 @@ function App() {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col items-center gap-6">
             {/* Logo */}
-            <div className="text-3xl font-black neon-text">SAINT NISKО</div>
+            <div className="text-3xl font-black neon-text">ROLEPLAYGROUND</div>
             
             {/* Social icons */}
             <div className="flex items-center gap-4">
